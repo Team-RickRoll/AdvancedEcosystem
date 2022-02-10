@@ -1,0 +1,6 @@
+name: AdvancedEcosystem
+version: '${version}'
+main: me.chaoticwagon.advancedecosystem.AdvancedEcosystem
+api-version: 1.18
+authors: [ ChaoticWagon ]
+description: Adds a detailed ecosystem to Minecraft
