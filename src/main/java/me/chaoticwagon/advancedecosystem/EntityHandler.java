@@ -1,7 +1,6 @@
 package me.chaoticwagon.advancedecosystem;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -12,18 +11,25 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class EntityHandler implements Listener {
+    public DataManager data;
 
-    public static HashMap<Entity,EntityInfo> entities = new HashMap<Entity,EntityInfo>();
+    public EntityHandler(DataManager data) {
+        this.data = data;
+    }
+
+    public static HashMap<String,EntityInfo> entities = new HashMap<String,EntityInfo>();
 
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
-        Entity entity = event.getEntity();
+        String entity = event.getEntity().getUniqueId().toString();
+        Entity type = event.getEntity();
 
-        if (entity instanceof Pig) {
+        if (type instanceof Pig) {
             Date date = new Date(Bukkit.getWorld("world").getFullTime());
-            EntityInfo pig = new EntityInfo(date.getDay(),entity.getType());
+            EntityInfo pig = new EntityInfo(date.getDay(),event.getEntity().getType());
             entities.put(entity,pig);
         }
 
@@ -41,6 +47,23 @@ public class EntityHandler implements Listener {
         }
 
     }
+
+    public void save(){
+        for (Map.Entry<String,EntityInfo> entry : entities.entrySet()) {
+            this.data.getConfig().set("entities." + entry.getKey(),entry.getValue());
+        }
+        this.data.saveConfig();
+    }
+
+    public void load(){
+        this.data.getConfig().getConfigurationSection("entities").getKeys(false).forEach(key -> {
+            EntityInfo info = (EntityInfo) this.data.getConfig().get("entities." + key,EntityInfo.class);
+            entities.put(key, info);
+        });
+    }
+
+
+
 
 
 }
