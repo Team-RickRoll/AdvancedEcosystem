@@ -51,8 +51,8 @@ public class EntityInfo {
     @Override
     public String toString() {
         return "EntityInfo{" +
-                "birthDate='" + birthDate + '\'' +
-                ", currentDate='" + currentDate + '\'' +
+                "birthDate='" + birthDay + '\'' +
+                ", currentDate='" + currentDay + '\'' +
                 ", entityType=" + entityType.toString() +
                 ", age='" + age + '\'' +
                 ", health=" + health +

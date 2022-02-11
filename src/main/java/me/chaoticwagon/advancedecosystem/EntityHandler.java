@@ -44,23 +44,12 @@ public class EntityHandler implements Listener {
 
         if (entity instanceof Pig) {
             player.sendMessage("Pig");
+            player.sendMessage(entities.get(entity.getUniqueId().toString()).toString());
         }
 
     }
 
-    public void save(){
-        for (Map.Entry<String,EntityInfo> entry : entities.entrySet()) {
-            this.data.getConfig().set("entities." + entry.getKey(),entry.getValue());
-        }
-        this.data.saveConfig();
-    }
 
-    public void load(){
-        this.data.getConfig().getConfigurationSection("entities").getKeys(false).forEach(key -> {
-            EntityInfo info = (EntityInfo) this.data.getConfig().get("entities." + key,EntityInfo.class);
-            entities.put(key, info);
-        });
-    }
 
 
 
