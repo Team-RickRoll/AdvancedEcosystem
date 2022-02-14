@@ -50,7 +50,6 @@ public class EntityHandler implements Listener {
         }
 
         if (entity instanceof Pig) {
-            player.sendMessage(entity.getUniqueId().toString());
             player.sendMessage("Pig");
             player.sendMessage(entities.get(entity.getUniqueId().toString()).toString());
         }

@@ -75,7 +75,7 @@ public class DataManager {
         this.getConfig().getConfigurationSection("entities").getKeys(false).forEach(key -> {
             @SuppressWarnings("unchecked")
             int bday = this.getConfig().getInt("entities." + key + ".birthDay");
-            EntityInfo info = new EntityInfo(bday, EntityType.valueOf(this.getConfig().getString("entities." + key + ".entityType").toString()));
+            EntityInfo info = new EntityInfo(bday, EntityType.valueOf(this.getConfig().getString("entities." + key + ".entityType")));
             entities.put(key, info);
         });
         return entities;

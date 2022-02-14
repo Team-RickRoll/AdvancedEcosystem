@@ -6,7 +6,7 @@ public class EntityInfo {
 
     private int birthDay;
     private int currentDay;
-    private EntityType entityType;
+    private String entityType;
     private String age;
     private int health;
 
@@ -20,7 +20,7 @@ public class EntityInfo {
 
     public EntityInfo(int birthDay, EntityType entityType) {
         this.birthDay = birthDay;
-        this.entityType = entityType;
+        this.entityType = entityType.toString();
     }
 
 
@@ -32,12 +32,16 @@ public class EntityInfo {
         this.currentDay = currentDay;
     }
 
-    public EntityType getEntityType() {
-        return entityType;
+    public String getEntityType() {
+        return entityType.toString();
     }
 
-    public void setEntityType(EntityType entityType) {
+    public void setEntityType(String entityType) {
         this.entityType = entityType;
+    }
+
+    public EntityType getAsEntityType() {
+        return EntityType.valueOf(entityType);
     }
 
     public String getAge() {
