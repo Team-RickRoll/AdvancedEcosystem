@@ -1,6 +1,8 @@
 package me.chaoticwagon.advancedecosystem;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 
 public class DataManager {
@@ -71,7 +74,8 @@ public class DataManager {
     public HashMap load(HashMap<String, EntityInfo> entities){
         this.getConfig().getConfigurationSection("entities").getKeys(false).forEach(key -> {
             @SuppressWarnings("unchecked")
-            EntityInfo info = (EntityInfo) this.getConfig().get("entities." + key,EntityInfo.class);
+            int bday = this.getConfig().getInt("entities." + key + ".birthDay");
+            EntityInfo info = new EntityInfo(bday, EntityType.valueOf(this.getConfig().getString("entities." + key + ".entityType").toString()));
             entities.put(key, info);
         });
         return entities;

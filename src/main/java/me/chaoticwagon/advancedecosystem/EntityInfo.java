@@ -10,6 +10,14 @@ public class EntityInfo {
     private String age;
     private int health;
 
+    public int getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(int birthDay) {
+        this.birthDay = birthDay;
+    }
+
     public EntityInfo(int birthDay, EntityType entityType) {
         this.birthDay = birthDay;
         this.entityType = entityType;

@@ -30,7 +30,9 @@ public class EntityHandler implements Listener {
         if (type instanceof Pig) {
             Date date = new Date(Bukkit.getWorld("world").getFullTime());
             EntityInfo pig = new EntityInfo(date.getDay(),event.getEntity().getType());
-            entities.put(entity,pig);
+            if (!entities.containsKey(entity)) {
+                entities.put(entity, pig);
+            }
         }
 
     }
@@ -42,7 +44,13 @@ public class EntityHandler implements Listener {
 
         if (!event.getPlayer().isSneaking()) return;
 
+        if (!entities.containsKey(entity.getUniqueId().toString())) {
+            Date date = new Date(Bukkit.getWorld("world").getFullTime());
+            entities.put(entity.getUniqueId().toString(), new EntityInfo(date.getDay(),entity.getType()));
+        }
+
         if (entity instanceof Pig) {
+            player.sendMessage(entity.getUniqueId().toString());
             player.sendMessage("Pig");
             player.sendMessage(entities.get(entity.getUniqueId().toString()).toString());
         }
